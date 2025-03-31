@@ -1,1 +1,1 @@
-# Polkilinik-Servis-Yonetimi-Projesi
+# Poliklinik-Servis-Yonetimi-Projesi
