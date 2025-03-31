@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Giriş</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+        <style>
+            body {
+                margin: 0;
+                font-family: 'Open Sans', sans-serif;
+                background: radial-gradient(ellipse at center, #0264d6 1%, #1c2b5a 100%);
+                color: #606468;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .role-selection {
+                display: flex;
+                flex-direction: column; /* Elemanları dikey hizalamak için */
+                align-items: center; /* Butonları ortalamak için */
+                margin-bottom: 20px;
+                width: 350px;
+                gap: 20px;
+            }
+
+                .role-selection button {
+                    width: 100%; /* Buton genişliği kapsayıcıya uyacak */
+                    height: 50px;
+                    background: #0264d6;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    transition: background 0.3s ease;
+                }
+
+                    .role-selection button:hover {
+                        background: #1c2b5a;
+                    }
+
+            .login-container {
+                background: #ffffff;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+                padding: 30px;
+                width: 350px;
+                display: none;
+            }
+
+                .login-container .logo {
+                    font-size: 40px;
+                    font-weight: bold;
+                    color: #0264d6;
+                    text-align: center;
+                    margin-bottom: 20px;
+                }
+
+                .login-container form .form-group {
+                    margin-bottom: 15px;
+                }
+
+                .login-container form .form-control {
+                    height: 50px;
+                    padding-left: 50px;
+                    border-radius: 25px;
+                }
+
+                .login-container form .input-icon {
+                    position: relative;
+                }
+
+                    .login-container form .input-icon i {
+                        position: absolute;
+                        top: 50%;
+                        left: 15px;
+                        transform: translateY(-50%);
+                        font-size: 20px;
+                        color: #0264d6;
+                    }
+
+                .login-container form button {
+                    width: 100%;
+                    height: 50px;
+                    background: #0264d6;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 25px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    transition: background 0.3s ease;
+                }
+
+                    .login-container form button:hover {
+                        background: #1c2b5a;
+                    }
+
+                .login-container .forgot-password {
+                    display: block;
+                    text-align: right;
+                    margin-top: 10px;
+                    font-size: 14px;
+                }
+
+                    .login-container .forgot-password a {
+                        color: #0264d6;
+                        text-decoration: none;
+                    }
+
+                        .login-container .forgot-password a:hover {
+                            text-decoration: underline;
+                        }
+        </style>
+    </head>
+
+<body>
+    <div class="role-selection">
+        <button onclick="showLoginForm('Doktor')">Doktor</button>
+        <button onclick="showLoginForm('Sekreter')">Sekreter</button>
+    </div>
+
+    <div class="login-container" id="login-form">
+        <div class="logo">LOGO</div>
+        <form method="POST">
+            <div class="form-group input-icon">
+                <i class="fas fa-user"></i>
+                <input type="text" name="kullaniciadi" class="form-control" placeholder="Kullanıcı Adı" required>
+            </div>
+            <div class="form-group input-icon">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="sifre" class="form-control" placeholder="Şifre" required>
+            </div>
+            <input type="hidden" name="role" id="role-input" value="">
+            <button type="submit">Giriş</button>
+        </form>
+        @if (!string.IsNullOrEmpty(ViewBag.uyari))
+        {
+            <p class="text-danger">@ViewBag.uyari</p>
+        }
+    </div>
+
+    <script>
+        function showLoginForm(role) {
+            document.getElementById('role-input').value = role; // Role inputunu güncelle
+
+            document.getElementById('login-form').style.display = 'block'; // Formu göster
+
+            if (role === 'Doktor') {
+                document.querySelector('.logo').textContent = "Doktor Giriş"; // Doktor başlığı
+            } else if (role === 'Sekreter') {
+                document.querySelector('.logo').textContent = "Sekreter Giriş"; // Sekreter başlığı
+            }
+        }
+
+    </script>
+</body>
+
+</html>

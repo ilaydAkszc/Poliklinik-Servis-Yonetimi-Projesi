@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ProjectPoliklinik_Servis_Final.Models.Entity.yatak>
+@{
+    ViewBag.Title = "OdaYatakListesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Oda ID'yi gruplamak için bir değişken oluştur
+    int? currentOdaId = null;
+    int rowspan = 0;
+}
+
+
+<h2>  Oda ve Yatak Listesi</h2>
+
+
+
+<p>
+
+</p>
+
+<table class="table table-bordered">
+    <tr>
+        <th rowspan="2">Oda No</th>
+        <th rowspan="2">Yatak No</th>
+        <th rowspan="2">Doluluk</th>
+
+
+    </tr>
+    <tbody>
+        @foreach (var odaGrubu in Model.GroupBy(y => y.oda_id))
+        {
+            // Aynı oda_id'ye sahip kayıtların sayısını al
+            rowspan = odaGrubu.Count();
+
+            foreach (var ytk in odaGrubu)
+            {
+                <tr>
+                    @if (ytk.oda_id != currentOdaId)
+                    {
+                        <td rowspan="@rowspan">@ytk.oda_id</td>
+
+                        currentOdaId = ytk.oda_id;
+                    }
+                    <td>@ytk.yatak_id</td>
+                    <td>@(ytk.doluluk ? "Dolu" : "Boş")</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,61 @@
+﻿@model ProjectPoliklinik_Servis_Final.Models.Entity.hasta
+@{
+    ViewBag.Title = "DGüncelle";
+    Layout = "~/Views/Shared/_DoktorLayout.cshtml";
+}
+
+
+
+
+
+ <title>Güncelle</title>
+<body>
+
+    <h2>Hasta Güncelleme</h2>
+
+    @using (Html.BeginForm("DGüncelle", "Hasta_Doktor", FormMethod.Post))
+    {
+
+
+        <div>
+            <label>Ad:</label>
+            @Html.TextBoxFor(model => model.ad)
+        </div>
+
+        <div>
+            <label>Soyad:</label>
+            @Html.TextBoxFor(model => model.soyad)
+        </div>
+
+
+
+
+        <div>
+            <label>Hastane Giriş Tarihi:</label>
+            @Html.TextBoxFor(model => model.hastanegiristarihi, "{0:yyyy-MM-dd}", new { @type = "date" })
+        </div>
+
+        <div>
+            <label>Doğum Tarihi:</label>
+            @Html.TextBoxFor(model => model.dob, "{0:yyyy-MM-dd}", new { @type = "date" })
+        </div>
+
+        <div>
+            <label>Hasta Tanısı:</label>
+            <input type="text" name="hasta_tanisi" />
+        </div>
+
+        <div>
+            <label>Tedavi:</label>
+            <input type="text" name="tedavi" />
+        </div>
+
+        <button type="submit">Güncelle</button>
+    }
+
+
+
+
+
+</body>
+

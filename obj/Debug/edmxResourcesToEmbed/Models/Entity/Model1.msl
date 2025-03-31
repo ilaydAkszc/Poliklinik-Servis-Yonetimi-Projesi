@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PoliklinikModelStoreContainer" CdmEntityContainer="PoliklinikEntities">
+    <EntitySetMapping Name="doktor">
+      <EntityTypeMapping TypeName="PoliklinikModel.doktor">
+        <MappingFragment StoreEntitySet="doktor">
+          <ScalarProperty Name="doktor_id" ColumnName="doktor_id" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="musaitlik_d" ColumnName="musaitlik_d" />
+          <ScalarProperty Name="date_d" ColumnName="date_d" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="kullaniciAdi" ColumnName="kullaniciAdi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hasta">
+      <EntityTypeMapping TypeName="PoliklinikModel.hasta">
+        <MappingFragment StoreEntitySet="hasta">
+          <ScalarProperty Name="hastakayitno" ColumnName="hastakayitno" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="hastanegiristarihi" ColumnName="hastanegiristarihi" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="hasta_id" ColumnName="hasta_id" />
+          <ScalarProperty Name="aktiflik" ColumnName="aktiflik" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hemsire">
+      <EntityTypeMapping TypeName="PoliklinikModel.hemsire">
+        <MappingFragment StoreEntitySet="hemsire">
+          <ScalarProperty Name="hemsire_id" ColumnName="hemsire_id" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="tel" ColumnName="tel" />
+          <ScalarProperty Name="musaitlik_d" ColumnName="musaitlik_d" />
+          <ScalarProperty Name="date_h" ColumnName="date_h" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="muayene">
+      <EntityTypeMapping TypeName="PoliklinikModel.muayene">
+        <MappingFragment StoreEntitySet="muayene">
+          <ScalarProperty Name="muayene_id" ColumnName="muayene_id" />
+          <ScalarProperty Name="hasta_tanisi" ColumnName="hasta_tanisi" />
+          <ScalarProperty Name="tedavi" ColumnName="tedavi" />
+          <ScalarProperty Name="hastakayitno" ColumnName="hastakayitno" />
+          <ScalarProperty Name="doktor_id" ColumnName="doktor_id" />
+          <ScalarProperty Name="oda_id" ColumnName="oda_id" />
+          <ScalarProperty Name="yatak_id" ColumnName="yatak_id" />
+          <ScalarProperty Name="hemsire_id" ColumnName="hemsire_id" />
+          <ScalarProperty Name="hasta_id" ColumnName="hasta_id" />
+          <ScalarProperty Name="hastanecikistarihi" ColumnName="hastanecikistarihi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="oda">
+      <EntityTypeMapping TypeName="PoliklinikModel.oda">
+        <MappingFragment StoreEntitySet="oda">
+          <ScalarProperty Name="oda_id" ColumnName="oda_id" />
+          <ScalarProperty Name="doluluk" ColumnName="doluluk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sekreter">
+      <EntityTypeMapping TypeName="PoliklinikModel.sekreter">
+        <MappingFragment StoreEntitySet="sekreter">
+          <ScalarProperty Name="kullaniciadi" ColumnName="kullaniciadi" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="kullanici_id" ColumnName="kullanici_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PoliklinikModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="yatak">
+      <EntityTypeMapping TypeName="PoliklinikModel.yatak">
+        <MappingFragment StoreEntitySet="yatak">
+          <ScalarProperty Name="yatak_id" ColumnName="yatak_id" />
+          <ScalarProperty Name="doluluk" ColumnName="doluluk" />
+          <ScalarProperty Name="oda_id" ColumnName="oda_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AggregatedCounter">
+      <EntityTypeMapping TypeName="PoliklinikModel.AggregatedCounter">
+        <MappingFragment StoreEntitySet="AggregatedCounter">
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Counter">
+      <EntityTypeMapping TypeName="PoliklinikModel.Counter">
+        <MappingFragment StoreEntitySet="Counter">
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hash">
+      <EntityTypeMapping TypeName="PoliklinikModel.Hash">
+        <MappingFragment StoreEntitySet="Hash">
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Field" ColumnName="Field" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Job">
+      <EntityTypeMapping TypeName="PoliklinikModel.Job">
+        <MappingFragment StoreEntitySet="Job">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="StateId" ColumnName="StateId" />
+          <ScalarProperty Name="StateName" ColumnName="StateName" />
+          <ScalarProperty Name="InvocationData" ColumnName="InvocationData" />
+          <ScalarProperty Name="Arguments" ColumnName="Arguments" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobParameter">
+      <EntityTypeMapping TypeName="PoliklinikModel.JobParameter">
+        <MappingFragment StoreEntitySet="JobParameter">
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobQueue">
+      <EntityTypeMapping TypeName="PoliklinikModel.JobQueue">
+        <MappingFragment StoreEntitySet="JobQueue">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="Queue" ColumnName="Queue" />
+          <ScalarProperty Name="FetchedAt" ColumnName="FetchedAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="List">
+      <EntityTypeMapping TypeName="PoliklinikModel.List">
+        <MappingFragment StoreEntitySet="List">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schema">
+      <EntityTypeMapping TypeName="PoliklinikModel.Schema">
+        <MappingFragment StoreEntitySet="Schema">
+          <ScalarProperty Name="Version" ColumnName="Version" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Server">
+      <EntityTypeMapping TypeName="PoliklinikModel.Server">
+        <MappingFragment StoreEntitySet="Server">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="LastHeartbeat" ColumnName="LastHeartbeat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Set">
+      <EntityTypeMapping TypeName="PoliklinikModel.Set">
+        <MappingFragment StoreEntitySet="Set">
+          <ScalarProperty Name="Key" ColumnName="Key" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="State">
+      <EntityTypeMapping TypeName="PoliklinikModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="JobId" ColumnName="JobId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,94 @@
+﻿@model List<ProjectPoliklinik_Servis_Final.Models.ViewModel.HastaMuayeneViewModel>
+@{
+    ViewBag.Title = "DHastaListesi";
+    Layout = "~/Views/Shared/_DoktorLayout.cshtml";
+}
+
+
+<h2>Hasta Listesi</h2>
+<p></p>
+<div class="d-flex ">
+    <input id="searchInput" class="form-control me-2" type="number" placeholder="Hasta kayıt numarası" oninput="validateInput()">
+    <p></p>
+    <button class="btn btn-primary" type="button" onclick="filterTable()">Ara</button>
+</div>
+<p></p>
+<div>
+    <table id="hastaTable" class="table table-bordered">
+        <thead>
+            <tr>
+                <td> Hasta Kayıt No</td>
+                <td> Hasta Adı</td>
+                <td> Hasta Soyadı</td>
+                <td> Hasta Tanısı</td>
+                <td> Uygulanan Tedavi</td>
+                <td> İlgilenen Hemşire</td>
+                <td> Oda No</td>
+                <td> Yatak No</td>
+                <td>İşlem</td>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var hst in Model)
+            {
+                <tr>
+                    <td>@hst.hastakayitno</td>
+                    <td>@hst.ad</td>
+                    <td>@hst.soyad</td>
+                    <td>@hst.hasta_tanisi</td>
+                    <td>@hst.tedavi</td>
+                    <td>@hst.HemsireAdSoyad</td>
+                    <td>@hst.oda_id</td>
+                    <td>@hst.yatak_id</td>
+                    <td>
+                        <a href="/Hasta_Doktor/DGüncelle/@hst.hasta_id" class="btn btn-success">Güncelle</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+<script>
+    // Sadece sayı kontrolü
+    function validateInput() {
+        var input = document.getElementById("searchInput");
+        if (isNaN(input.value) || input.value < 0) {
+            input.value = ""; // Geçersiz giriş olursa temizle
+        }
+    }
+
+    // Tablo filtreleme
+    function filterTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value; // Sayı tipinde doğrudan alınabilir
+        var table = document.getElementById("hastaTable");
+        var tr = table.getElementsByTagName("tr");
+
+        // Kullanıcı hiçbir şey yazmazsa tüm satırları göster
+        if (!filter) {
+            for (var i = 1; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+            return;
+        }
+
+        // Tablo satırlarını döngüye al
+        for (var i = 1; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[0]; // İlk sütun (Hasta Kayıt No)
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue === filter) {
+                    tr[i].style.display = ""; // Eşleşiyorsa göster
+                } else {
+                    tr[i].style.display = "none"; // Eşleşmiyorsa gizle
+                }
+            }
+        }
+    }
+</script>
+
+
+

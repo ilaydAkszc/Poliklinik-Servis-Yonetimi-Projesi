@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProjectPoliklinik_Servis_Final.Models.ViewModel.TaburcuViewModel>
+
+@{
+    ViewBag.Title = "Taburcu Listesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Taburcu Listesi</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Hasta Kayıt No</th>
+            <th>Hasta Adı</th>
+            <th>Hasta Soyadı</th>
+            <th>Tanı</th>
+            <th>Tedavi</th>
+            <th>Doktor Adı Soyadı</th>
+            <th>Hemşire Adı Soyadı</th>
+            <th>Oda No</th>
+            <th>Yatak No</th>
+            <th>Hastane Çıkış Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var hasta in Model)
+        {
+            <tr>
+                <td>@hasta.HastaKayitNo</td>
+                <td>@hasta.HastaAd</td>
+                <td>@hasta.HastaSoyad</td>
+                <td>@hasta.HastaTanisi</td>
+                <td>@hasta.Tedavi</td>
+                <td>@hasta.DoktorAdSoyad</td>
+                <td>@hasta.HemsireAdSoyad</td>
+                <td>@hasta.OdaNo</td>
+                <td>@hasta.YatakNo</td>
+                <td>@hasta.HastaneCikisTarihi</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

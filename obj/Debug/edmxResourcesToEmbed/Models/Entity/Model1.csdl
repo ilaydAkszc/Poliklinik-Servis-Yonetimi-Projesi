@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PoliklinikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="doktor">
+    <Key>
+      <PropertyRef Name="doktor_id" />
+    </Key>
+    <Property Name="doktor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tel" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="musaitlik_d" Type="Boolean" Nullable="false" />
+    <Property Name="date_d" Type="Int16" />
+    <Property Name="sifre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciAdi" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="muayene" Relationship="Self.FK_muayene_doktor" FromRole="doktor" ToRole="muayene" />
+  </EntityType>
+  <EntityType Name="hasta">
+    <Key>
+      <PropertyRef Name="hasta_id" />
+    </Key>
+    <Property Name="hastakayitno" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tel" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="adres" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hastanegiristarihi" Type="DateTime" Precision="3" />
+    <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="hasta_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="aktiflik" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="muayene" Relationship="Self.FK_muayene_hasta" FromRole="hasta" ToRole="muayene" />
+  </EntityType>
+  <EntityType Name="hemsire">
+    <Key>
+      <PropertyRef Name="hemsire_id" />
+    </Key>
+    <Property Name="hemsire_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="tel" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="musaitlik_d" Type="Boolean" Nullable="false" />
+    <Property Name="date_h" Type="Int16" />
+    <NavigationProperty Name="muayene" Relationship="Self.FK_muayene_hemsire" FromRole="hemsire" ToRole="muayene" />
+  </EntityType>
+  <EntityType Name="muayene">
+    <Key>
+      <PropertyRef Name="muayene_id" />
+    </Key>
+    <Property Name="muayene_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hasta_tanisi" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="tedavi" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="hastakayitno" Type="String" MaxLength="11" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="doktor_id" Type="Int32" Nullable="false" />
+    <Property Name="oda_id" Type="Int32" />
+    <Property Name="yatak_id" Type="Int32" />
+    <Property Name="hemsire_id" Type="Int32" Nullable="false" />
+    <Property Name="hasta_id" Type="Int32" Nullable="false" />
+    <Property Name="hastanecikistarihi" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="doktor" Relationship="Self.FK_muayene_doktor" FromRole="muayene" ToRole="doktor" />
+    <NavigationProperty Name="hasta" Relationship="Self.FK_muayene_hasta" FromRole="muayene" ToRole="hasta" />
+    <NavigationProperty Name="hemsire" Relationship="Self.FK_muayene_hemsire" FromRole="muayene" ToRole="hemsire" />
+    <NavigationProperty Name="oda" Relationship="Self.FK_muayene_oda" FromRole="muayene" ToRole="oda" />
+    <NavigationProperty Name="yatak" Relationship="Self.FK_muayene_yatak" FromRole="muayene" ToRole="yatak" />
+  </EntityType>
+  <EntityType Name="oda">
+    <Key>
+      <PropertyRef Name="oda_id" />
+    </Key>
+    <Property Name="oda_id" Type="Int32" Nullable="false" />
+    <Property Name="doluluk" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="muayene" Relationship="Self.FK_muayene_oda" FromRole="oda" ToRole="muayene" />
+    <NavigationProperty Name="yatak" Relationship="Self.FK_yatak_oda" FromRole="oda" ToRole="yatak" />
+  </EntityType>
+  <EntityType Name="sekreter">
+    <Key>
+      <PropertyRef Name="kullanici_id" />
+    </Key>
+    <Property Name="kullaniciadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sifre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="kullanici_id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="yatak">
+    <Key>
+      <PropertyRef Name="yatak_id" />
+    </Key>
+    <Property Name="yatak_id" Type="Int32" Nullable="false" />
+    <Property Name="doluluk" Type="Boolean" Nullable="false" />
+    <Property Name="oda_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="muayene" Relationship="Self.FK_muayene_yatak" FromRole="yatak" ToRole="muayene" />
+    <NavigationProperty Name="oda" Relationship="Self.FK_yatak_oda" FromRole="yatak" ToRole="oda" />
+  </EntityType>
+  <EntityType Name="AggregatedCounter">
+    <Key>
+      <PropertyRef Name="Key" />
+    </Key>
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Int64" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Counter">
+    <Key>
+      <PropertyRef Name="Key" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="Int32" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Hash">
+    <Key>
+      <PropertyRef Name="Key" />
+      <PropertyRef Name="Field" />
+    </Key>
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Field" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="7" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StateId" Type="Int64" />
+    <Property Name="StateName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="InvocationData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Arguments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="JobParameter" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="Job" ToRole="JobParameter" />
+    <NavigationProperty Name="State" Relationship="Self.FK_HangFire_State_Job" FromRole="Job" ToRole="State" />
+  </EntityType>
+  <EntityType Name="JobParameter">
+    <Key>
+      <PropertyRef Name="JobId" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="JobId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_JobParameter_Job" FromRole="JobParameter" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="JobQueue">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Queue" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int64" Nullable="false" />
+    <Property Name="Queue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FetchedAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="List">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Key" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Schema">
+    <Key>
+      <PropertyRef Name="Version" />
+    </Key>
+    <Property Name="Version" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Server">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastHeartbeat" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Set">
+    <Key>
+      <PropertyRef Name="Key" />
+      <PropertyRef Name="Value" />
+    </Key>
+    <Property Name="Key" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Score" Type="Double" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="JobId" />
+    </Key>
+    <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="JobId" Type="Int64" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Reason" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Job" Relationship="Self.FK_HangFire_State_Job" FromRole="State" ToRole="Job" />
+  </EntityType>
+  <Association Name="FK_muayene_doktor">
+    <End Role="doktor" Type="Self.doktor" Multiplicity="1" />
+    <End Role="muayene" Type="Self.muayene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="doktor">
+        <PropertyRef Name="doktor_id" />
+      </Principal>
+      <Dependent Role="muayene">
+        <PropertyRef Name="doktor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_muayene_hasta">
+    <End Role="hasta" Type="Self.hasta" Multiplicity="1" />
+    <End Role="muayene" Type="Self.muayene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hasta">
+        <PropertyRef Name="hasta_id" />
+      </Principal>
+      <Dependent Role="muayene">
+        <PropertyRef Name="hasta_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_muayene_hemsire">
+    <End Role="hemsire" Type="Self.hemsire" Multiplicity="1" />
+    <End Role="muayene" Type="Self.muayene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hemsire">
+        <PropertyRef Name="hemsire_id" />
+      </Principal>
+      <Dependent Role="muayene">
+        <PropertyRef Name="hemsire_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_muayene_oda">
+    <End Role="oda" Type="Self.oda" Multiplicity="0..1" />
+    <End Role="muayene" Type="Self.muayene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="oda">
+        <PropertyRef Name="oda_id" />
+      </Principal>
+      <Dependent Role="muayene">
+        <PropertyRef Name="oda_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_muayene_yatak">
+    <End Role="yatak" Type="Self.yatak" Multiplicity="0..1" />
+    <End Role="muayene" Type="Self.muayene" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="yatak">
+        <PropertyRef Name="yatak_id" />
+      </Principal>
+      <Dependent Role="muayene">
+        <PropertyRef Name="yatak_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_yatak_oda">
+    <End Role="oda" Type="Self.oda" Multiplicity="1" />
+    <End Role="yatak" Type="Self.yatak" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="oda">
+        <PropertyRef Name="oda_id" />
+      </Principal>
+      <Dependent Role="yatak">
+        <PropertyRef Name="oda_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HangFire_JobParameter_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="JobParameter" Type="Self.JobParameter" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="JobParameter">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HangFire_State_Job">
+    <End Role="Job" Type="Self.Job" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="State" Type="Self.State" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Job">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="State">
+        <PropertyRef Name="JobId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PoliklinikEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="doktor" EntityType="Self.doktor" />
+    <EntitySet Name="hasta" EntityType="Self.hasta" />
+    <EntitySet Name="hemsire" EntityType="Self.hemsire" />
+    <EntitySet Name="muayene" EntityType="Self.muayene" />
+    <EntitySet Name="oda" EntityType="Self.oda" />
+    <EntitySet Name="sekreter" EntityType="Self.sekreter" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="yatak" EntityType="Self.yatak" />
+    <EntitySet Name="AggregatedCounter" EntityType="Self.AggregatedCounter" />
+    <EntitySet Name="Counter" EntityType="Self.Counter" />
+    <EntitySet Name="Hash" EntityType="Self.Hash" />
+    <EntitySet Name="Job" EntityType="Self.Job" />
+    <EntitySet Name="JobParameter" EntityType="Self.JobParameter" />
+    <EntitySet Name="JobQueue" EntityType="Self.JobQueue" />
+    <EntitySet Name="List" EntityType="Self.List" />
+    <EntitySet Name="Schema" EntityType="Self.Schema" />
+    <EntitySet Name="Server" EntityType="Self.Server" />
+    <EntitySet Name="Set" EntityType="Self.Set" />
+    <EntitySet Name="State" EntityType="Self.State" />
+    <AssociationSet Name="FK_muayene_doktor" Association="Self.FK_muayene_doktor">
+      <End Role="doktor" EntitySet="doktor" />
+      <End Role="muayene" EntitySet="muayene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_muayene_hasta" Association="Self.FK_muayene_hasta">
+      <End Role="hasta" EntitySet="hasta" />
+      <End Role="muayene" EntitySet="muayene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_muayene_hemsire" Association="Self.FK_muayene_hemsire">
+      <End Role="hemsire" EntitySet="hemsire" />
+      <End Role="muayene" EntitySet="muayene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_muayene_oda" Association="Self.FK_muayene_oda">
+      <End Role="oda" EntitySet="oda" />
+      <End Role="muayene" EntitySet="muayene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_muayene_yatak" Association="Self.FK_muayene_yatak">
+      <End Role="yatak" EntitySet="yatak" />
+      <End Role="muayene" EntitySet="muayene" />
+    </AssociationSet>
+    <AssociationSet Name="FK_yatak_oda" Association="Self.FK_yatak_oda">
+      <End Role="oda" EntitySet="oda" />
+      <End Role="yatak" EntitySet="yatak" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HangFire_JobParameter_Job" Association="Self.FK_HangFire_JobParameter_Job">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="JobParameter" EntitySet="JobParameter" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HangFire_State_Job" Association="Self.FK_HangFire_State_Job">
+      <End Role="Job" EntitySet="Job" />
+      <End Role="State" EntitySet="State" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

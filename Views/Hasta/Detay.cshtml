@@ -1,0 +1,59 @@
+﻿@model ProjectPoliklinik_Servis_Final.Models.ViewModel.HastaMuayeneViewModel
+@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detay</title>
+</head>
+<body>
+
+    <div class="container mt-4">
+        <h2>Hasta Detayları</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Hasta Kayıt No</th>
+                <td>@Model.hastakayitno</td>
+            </tr>
+            <tr>
+                <th>Hasta Adı</th>
+                <td>@Model.ad</td>
+            </tr>
+            <tr>
+                <th>Hasta Soyadı</th>
+                <td>@Model.soyad</td>
+            </tr>
+            <tr>
+                <th>Tanı</th>
+                <td>@Model.hasta_tanisi</td>
+            </tr>
+            <tr>
+                <th>Tedavi</th>
+                <td>@Model.tedavi</td>
+            </tr>
+            <tr>
+                <th>Oda No</th>
+                <td>@Model.oda_id</td>
+            </tr>
+            <tr>
+                <th>Yatak No</th>
+                <td>@Model.yatak_id</td>
+            </tr>
+            <tr>
+                <th>Doktor</th>
+                <td>@Model.DoktorAdSoyad</td>
+            </tr>
+            <tr>
+                <th>Hemşire</th>
+                <td>@Model.HemsireAdSoyad</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

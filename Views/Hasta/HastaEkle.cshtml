@@ -1,0 +1,199 @@
+﻿
+@{
+    ViewBag.Title = "HastaEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Hasta Ekle</h2>
+
+<form id="hastaEkleForm" class="form-group" method="post">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Hasta Bilgileri -->
+            <div class="form-group">
+                <label>Hasta Kayıt No</label>
+                <input  name="hastakayitno" class="form-control me-2" type="text" placeholder="11 haneli hasta kayıt numarası"
+                       maxlength="11">
+              
+            </div>
+            <div class="form-group">
+                <label>Ad</label>
+                <input type="text" class="form-control" name="ad" required />
+            </div>
+            <div class="form-group">
+                <label>Soyad</label>
+                <input type="text" class="form-control" name="soyad" required />
+            </div>
+            <div class="form-group">
+                <label>Doğum Tarihi</label>
+                <input type="date" class="form-control" name="dob" required />
+            </div>
+            <div class="form-group">
+                <label >Telefon Numarası (Örnek: 05395678901):</label>
+                <input  name="tel" class="form-control" type="text" placeholder="05395678901" maxlength="11">
+             
+            </div>
+            <div class="form-group">
+                <label>Adres</label>
+                <textarea class="form-control" name="adres" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Hastane Giriş Tarihi</label>
+                <input type="date" class="form-control" name="hastanegiristarihi" />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Doktor Seçimi -->
+            <div class="form-group">
+                <label>Doktor</label>
+                @if (ViewBag.MüsaitDoktorlar != null && ((List<SelectListItem>)ViewBag.MüsaitDoktorlar).Count > 0)
+                {
+                    <select class="form-control" name="doktor_id" required>
+                        <option value="">Müsait doktor seçiniz</option>
+                        @foreach (var doktor in (List<SelectListItem>)ViewBag.MüsaitDoktorlar)
+                        {
+                            <option value="@doktor.Value">@doktor.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <p class="text-danger">Müsait doktor bulunamadı.</p>
+                }
+            </div>
+
+            <!-- Hemşire Seçimi -->
+            <div class="form-group">
+                <label>Hemşire</label>
+                @if (ViewBag.MüsaitHemşireler != null && ((List<SelectListItem>)ViewBag.MüsaitHemşireler).Count > 0)
+                {
+                    <select class="form-control" name="hemsire_id" required>
+                        <option value="">Müsait hemşire seçiniz</option>
+                        @foreach (var hemsire in (List<SelectListItem>)ViewBag.MüsaitHemşireler)
+                        {
+                            <option value="@hemsire.Value">@hemsire.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <p class="text-danger">Müsait hemşire bulunamadı.</p>
+                }
+            </div>
+
+            <!-- Oda Seçimi -->
+            <div class="form-group">
+                <label>Oda</label>
+                @if (ViewBag.MüsaitOdalar != null && ((List<SelectListItem>)ViewBag.MüsaitOdalar).Count > 0)
+                {
+                    <select class="form-control" name="oda_id" id="oda" required>
+                        <option value="">Müsait oda seçiniz</option>
+                        @foreach (var oda in (List<SelectListItem>)ViewBag.MüsaitOdalar)
+                        {
+                            <option value="@oda.Value">@oda.Text</option>
+                        }
+                    </select>
+                }
+                else
+                {
+                    <p class="text-danger">Müsait oda bulunamadı.</p>
+                }
+            </div>
+
+            <!-- Yatak Seçimi -->
+
+            <div class="form-group">
+                <label for="yatak">Yatak Seçimi</label>
+                <select id="yatak" name="yatak_id" class="form-control">
+                    <option value="">Lütfen önce bir oda seçiniz</option>
+                </select>
+            </div>
+
+
+            <!-- Muayene Bilgileri -->
+            <div class="form-group">
+                <label>Tanı</label>
+                <input type="text" class="form-control" name="hasta_tanisi" />
+            </div>
+            <div class="form-group">
+                <label>Tedavi</label>
+                <input type="text" class="form-control" name="tedavi" />
+            </div>
+
+
+            <button type="submit" class="btn btn-success">Hasta Ekle</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Oda seçiminde tetiklenir
+        $('#oda').change(function () {
+            var odaId = $(this).val();
+            var yatakDropdown = $('#yatak');
+
+            // Eğer bir oda seçilmemişse yatak dropdown'ını sıfırla
+            if (!odaId) {
+                yatakDropdown.html('<option value="">Lütfen önce bir oda seçiniz</option>');
+                return;
+            }
+
+            // AJAX ile yatakları getir
+            $.ajax({
+                url: '/OdaYatak/GetBosYataklarByOdaId',
+                type: 'GET',
+                data: { odaId: odaId },
+                success: function (data) {
+                    yatakDropdown.empty(); // Mevcut seçenekleri temizle
+                    yatakDropdown.append('<option value="">Lütfen bir yatak seçiniz</option>');
+
+                    // Gelen yatak verilerini dropdown'a ekle
+                    $.each(data, function (index, yatak) {
+                        yatakDropdown.append('<option value="' + yatak.yatakId + '">' + yatak.yatakAdi + '</option>');
+                    });
+                },
+                error: function () {
+                    alert('Yataklar yüklenirken bir hata oluştu.');
+                }
+            });
+        });
+    });
+
+ 
+
+ 
+
+    // Hasta ekleme formunda telefon ve kayıt numarası doğrulama
+    document.getElementById("hastaEkleForm").addEventListener("submit", function (e) {
+        var phoneInput = document.getElementById("phoneInput").value;
+        var searchInput = document.getElementById("searchInput").value;
+
+        if (!/^\d{11}$/.test(searchInput)) {
+            e.preventDefault();
+            alert("Hasta kayıt numarası tam olarak 11 hane olmalıdır.");
+        }
+
+        if (!/^\d{4}\d{3}\d{2}\d{2}$/.test(phoneInput)) {
+            e.preventDefault();
+            alert("Lütfen geçerli bir telefon numarası formatı girin. Örnek: 05395678901");
+        }
+    });
+
+
+
+</script>
+

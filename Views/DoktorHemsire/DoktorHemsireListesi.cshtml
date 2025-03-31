@@ -1,0 +1,69 @@
+﻿@model ProjectPoliklinik_Servis_Final.Models.ViewModel.DoktorHemsireViewModel
+@{
+    ViewBag.Title = "DoktorHemsireListesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>Doktorlar</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon</th>
+                <th>Müsaitlik durumu</th>
+                <th>Çalışma Günü</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var doktor in Model.doktor)
+            {
+                <tr>
+
+                    <td>@doktor.ad</td>
+                    <td>@doktor.soyad</td>
+                    <td>@doktor.tel</td>
+                    <td>@(doktor.musaitlik_d? "Çalışıyor" : "Dinlenmede")</td>
+                    <td>@doktor.date_d</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h2>Hemşireler</h2>
+    <table class=" table table-bordered">
+        <thead>
+            <tr>
+
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Telefon</th>
+                <th>Müsaitlik durumu</th>
+                <th>Çalışma Günü</th>
+
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var hemsire in Model.hemsire)
+            {
+                <tr>
+
+                    <td>@hemsire.ad</td>
+                    <td>@hemsire.soyad</td>
+                    <td>@hemsire.tel</td>
+                    <td>@(hemsire.musaitlik_d ? "Çalışıyor" : "Dinlenmede")</td>
+                    <td>@hemsire.date_h</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

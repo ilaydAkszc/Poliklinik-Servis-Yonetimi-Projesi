@@ -1,0 +1,126 @@
+﻿@model IEnumerable<ProjectPoliklinik_Servis_Final.Models.Entity.hasta>
+@{
+    ViewBag.Title = "HastaListesi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Hasta Listesi</h2>
+<div>
+    <div class="form-inline">
+        <a href="/Hasta/HastaEkle/" class="btn btn-success ml-auto ">Yeni Hasta Ekle</a>
+        <button id="gelenHastaSayisiBtn" class="btn btn-warning" onclick="getGelenHastaSayisi()">Gelen Hasta Sayısı</button>
+        <span id="gelenHastaSayisi" style="margin-left: 10px; font-weight: bold;"></span>
+    </div>
+    <p> </p>
+
+    <div class="d-flex">
+        <input id="searchInput" class="form-control me-2" type="number" placeholder="11 haneli hasta kayıt numarası" oninput="validateInput()">
+        <p></p>
+        <button class="btn btn-primary" type="button" onclick="filterTable()">Ara</button>
+    </div>
+
+
+</div>
+
+<p>      </p>
+
+<table id="hastaTable" class="table table-bordered">
+    <tr>
+        <th>Hasta Kayıt No</th>
+        <th>Hasta Adı</th>
+        <th>Hasta Soyadı</th>
+        <th>Doğum Tarihi</th>
+        <th>Telefon</th>
+        <th>Adres</th>
+        <th>Hastane Giriş Tarihi</th>
+        <th colspan="3">İşlem</th>
+
+
+    </tr>
+    <tbody>
+        @foreach (var hst in Model)
+        {
+            <tr>
+                <td>@hst.hastakayitno</td>
+                <td>@hst.ad</td>
+                <td>@hst.soyad</td>
+                <td>@hst.dob.ToString("dd-MM-yyyy")</td>
+                <td>@hst.tel</td>
+                <td>@hst.adres</td>
+                <td>@hst.hastanegiristarihi</td>
+                <td><a href="/Hasta/Detay?hasta_id=@hst.hasta_id" class="btn btn-warning">Detay</a> </td>
+                <td><a href="/Hasta/Güncelle/@hst.hasta_id" class="btn btn-primary">Güncelle</a></td>
+                <td>
+                    @using (Html.BeginForm("Sil", "Hasta", new { id = hst.hasta_id }, FormMethod.Post, new { @class = "deleteForm" }))
+                    {
+                <button type="submit" class="btn btn-danger" onclick="return confirmDelete()">Sil</button>
+                }
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+
+    function confirmDelete() {
+        return confirm("Hastayı silmek istediğinizden emin misiniz?");
+    }
+    // Sadece sayı kontrolü
+    function validateInput() {
+        var input = document.getElementById("searchInput");
+        if (isNaN(input.value) || input.value < 0) {
+            input.value = ""; // Geçersiz giriş olursa temizle
+        }
+    }
+
+    // Tablo filtreleme
+    function filterTable() {
+        var input = document.getElementById("searchInput");
+        var filter = input.value; // Sayı tipinde doğrudan alınabilir
+        var table = document.getElementById("hastaTable");
+        var tr = table.getElementsByTagName("tr");
+
+        // Kullanıcı hiçbir şey yazmazsa tüm satırları göster
+        if (!filter) {
+            for (var i = 1; i < tr.length; i++) {
+                tr[i].style.display = "";
+            }
+            return;
+        }
+
+        // Tablo satırlarını döngüye al
+        for (var i = 1; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[0]; // İlk sütun (Hasta Kayıt No)
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue === filter) {
+                    tr[i].style.display = ""; // Eşleşiyorsa göster
+                } else {
+                    tr[i].style.display = "none"; // Eşleşmiyorsa gizle
+                }
+            }
+        }
+    }
+    function getGelenHastaSayisi() {
+        // AJAX ile backend'den veri çek
+        fetch('/Hasta/GelenHastaSayisi')
+            .then(response => response.json())
+            .then(data => {
+                // Butonun yanında hasta sayısını göster
+                document.getElementById("gelenHastaSayisi").innerText = "Bugün gelen hasta sayısı: " + data;
+            })
+            .catch(error => {
+                console.error('Hata:', error);
+                document.getElementById("gelenHastaSayisi").innerText = "Bir hata oluştu.";
+            });
+    }
+
+
+</script>
+
+
+

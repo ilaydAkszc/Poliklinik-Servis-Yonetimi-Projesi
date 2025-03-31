@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a6caa6f472eb45d2a268bd0ac8ea49ae" Name="Diagram1">
+        <EntityTypeShape EntityType="PoliklinikModel.doktor" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.hasta" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.hemsire" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.muayene" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.oda" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.sekreter" Width="1.5" PointX="7.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.yatak" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.AggregatedCounter" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Counter" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Hash" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Job" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.JobParameter" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.JobQueue" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.List" Width="1.5" PointX="11.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Schema" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Server" Width="1.5" PointX="12.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.Set" Width="1.5" PointX="5.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PoliklinikModel.State" Width="1.5" PointX="10" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="PoliklinikModel.FK_muayene_doktor" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_muayene_hasta" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_muayene_hemsire" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_muayene_oda" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_muayene_yatak" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_yatak_oda" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_HangFire_JobParameter_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="PoliklinikModel.FK_HangFire_State_Job" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

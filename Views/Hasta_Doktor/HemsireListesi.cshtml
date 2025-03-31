@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "HemsireListesi";
+    Layout = "~/Views/Shared/_DoktorLayout.cshtml";
+}
+
+<h2>Hemşire Listesi</h2>
+
+<table class=" table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Telefon</th>
+            <th>Müsaitlik durumu</th>
+            <th>Çalışma Günü</th>
+
+
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var hemsire in Model)
+        {
+            <tr>
+
+                <td>@hemsire.ad</td>
+                <td>@hemsire.soyad</td>
+                <td>@hemsire.tel</td>
+                <td>@(hemsire.musaitlik_d ? "Çalışıyor" : "Dinlenmede")</td>
+                <td>@hemsire.date_h</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

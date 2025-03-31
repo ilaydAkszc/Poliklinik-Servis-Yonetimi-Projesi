@@ -1,0 +1,92 @@
+﻿@model ProjectPoliklinik_Servis_Final.Models.ViewModel.HastaMuayeneViewModel
+@{
+    ViewBag.Title = "Güncelle";
+    Layout = "~/Views/Shared/_DoktorLayout.cshtml";
+}
+
+
+
+
+
+
+    <div>
+
+
+        <h2>Hasta Güncelle</h2>
+
+        @using (Html.BeginForm("Güncelle", "Hasta", FormMethod.Post))
+        {
+            <input type="hidden" name="id" value="@Model.hasta_id" />
+
+            <div class="form-group">
+                <label for="ad">Ad</label>
+                @Html.TextBoxFor(model => model.ad, new { @class = "form-control", placeholder = "Ad" })
+            </div>
+
+            <div class="form-group">
+                <label for="soyad">Soyad</label>
+                @Html.TextBoxFor(model => model.soyad, new { @class = "form-control", placeholder = "Soyad" })
+            </div>
+
+            <div class="form-group">
+                <label for="hastakayitno">Hasta Kayıt No</label>
+                @Html.TextBoxFor(model => model.hastakayitno, new { @class = "form-control", placeholder = "Kayıt Numarası" })
+            </div>
+
+            <div class="form-group">
+                <label for="tel">Telefon</label>
+                @Html.TextBoxFor(model => model.tel, new { @class = "form-control", placeholder = "Telefon Numarası" })
+            </div>
+
+            <div class="form-group">
+                <label for="adres">Adres</label>
+                @Html.TextAreaFor(model => model.adres, new { @class = "form-control", placeholder = "Adres", rows = 3 })
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Doğum Tarihi</label>
+                @Html.TextBoxFor(model => model.dob, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            </div>
+
+            <div class="form-group">
+                <label for="hastanegiristarihi">Hastane Giriş Tarihi</label>
+                @Html.TextBoxFor(model => model.hastanegiristarihi, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            </div>
+
+            <div class="form-group">
+                <label for="doktor_id">Doktor</label>
+                @Html.DropDownList("doktor_id", ViewBag.MüsaitDoktorlar as IEnumerable<SelectListItem>, "Seçiniz", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="hemsire_id">Hemşire</label>
+                @Html.DropDownList("hemsire_id", ViewBag.MüsaitHemşireler as IEnumerable<SelectListItem>, "Seçiniz", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="oda_id">Oda</label>
+                @Html.DropDownList("oda_id", ViewBag.MüsaitOdalar as IEnumerable<SelectListItem>, "Seçiniz", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="yatak_id">Yatak</label>
+                @Html.DropDownList("yatak_id", ViewBag.MüsaitYataklar as IEnumerable<SelectListItem>, "Seçiniz", new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <label for="hasta_tanisi">Tanı</label>
+                @Html.TextArea("hasta_tanisi", ViewBag.Tanı as string, new { @class = "form-control", placeholder = "Hasta Tanısı", rows = 3 })
+            </div>
+
+            <div class="form-group">
+                <label for="tedavi">Tedavi</label>
+                @Html.TextArea("tedavi", ViewBag.Tedavi as string, new { @class = "form-control", placeholder = "Tedavi Bilgisi", rows = 3 })
+            </div>
+
+            <button type="submit" class="btn btn-primary">Güncelle</button>
+            <a href="@Url.Action("HastaListesi", "Hasta")" class="btn btn-secondary">İptal</a>
+        }
+
+
+    </div>
+
